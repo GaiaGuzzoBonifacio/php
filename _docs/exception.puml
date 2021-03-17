@@ -1,0 +1,23 @@
+@startuml
+
+hide methods
+hide attributes
+hide circle
+
+class readJSON
+note right: "La funzione non trova il file e genera\n<b>throw new Exception()</b>" 
+
+class Exception 
+note right: "L'eccezione contiene \ninformazioni sull'errore" 
+
+class readJSONTest
+note right: "Lo script principale intercetta \nl'eccezione con **try catch**"
+
+
+readJSON  --->  Exception 
+Exception --->  readJSONTest 
+
+'readJSON .. N1
+'N1 .. readJSONTest
+
+@enduml
