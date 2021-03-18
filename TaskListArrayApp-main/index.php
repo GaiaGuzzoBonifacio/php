@@ -11,8 +11,9 @@ if(isset($_GET['searchText']) && $_GET['searchText'] !=='')
     $searchText = trim(filter_var($_GET['searchText'], FILTER_SANITIZE_STRING));
     var_dump($searchText);
     die();
-    $taskList = searchText($searchText, $taskList)
-} else {
+    $taskList = searchText($searchText, $taskList);
+} 
+else {
     $searchText = '';
 }
 
