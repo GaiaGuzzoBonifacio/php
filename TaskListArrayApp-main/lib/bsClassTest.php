@@ -1,10 +1,18 @@
 <?php
-require './vendortestTools/testTool.php';
+require '../vendor/testTools/testTool.php';
 
 function getClass(string $status):string {
     if($status === 'progress'){
-        return 'primary'
+        return 'primary';
         // "bg-<?= getClass($status) *chiusura php*";
+    } else {
+        if($status === 'todo'){
+            return 'danger';
+        } else {
+            if ($status === 'done'){
+                return 'secondary';
+            }
+        }
     }
     // ... status e altri casi
 }

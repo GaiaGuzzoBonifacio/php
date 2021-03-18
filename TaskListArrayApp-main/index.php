@@ -1,6 +1,7 @@
 <?php
 require "./lib/JSONReader.php";
 require "./lib/searchFunctions.php";
+require "./lib/bsClassTest.php";
 
 // Model JSONReader (la parte che gestisce i dati)
 $taskList = JSONReader('./dataset/TaskList.json');
@@ -16,7 +17,6 @@ if(isset($_GET['searchText']) && $_GET['searchText'] !=='')
 else {
     $searchText = '';
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -94,7 +94,7 @@ else {
                 <tr>
                     <td>Comprare la farina</td>
                     <td class="text-center">
-                        <span class="badge bg-primary text-uppercase">progress</span>
+                        <span class="badge bg-<?= getClass($status)?> text-uppercase">progress</span>
                     </td>
                     <td class="text-nowrap">
                         18 Settembre
