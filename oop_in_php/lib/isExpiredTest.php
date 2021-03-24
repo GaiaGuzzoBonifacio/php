@@ -1,36 +1,29 @@
 <?php
-require "../vendor/testTools/testTool.php";
-require "../lib/Task.php";
+require "../vendor/TestTools/testTool.php";
+require "../class/Task.php";
 
 $testCases = [
+    
     [
-        'search' => 'progress',
-        'expectedCount' => 2,
-        'description' => 'ricerca di status in progress'
-    ],
-    [
-        'search' => 'todo',
-        'expectedCount' => 4,
+        'expired' => 'no',
+        'expectedCount' => 9,
         'description' => 'ricerca di status in todo'
     ],
     [
-        'search' => 'done',
-        'expectedCount' => 3,
+        'expired' => 'yes',
+        'expectedCount' => 1,
         'description' => 'ricerca di status in done'
     ],
     [
-        'search' => 'all',
-        'expectedCount' => 9,
-        'description' => 'ricerca all status'
+        'expired' => 'all',
+        'expectedCount' => 10,
+        'description' => 'ricerca all expirationDate'
     ],
-    [
-        'search' => '',
-        'expectedCount' => 9,
-        'description' => 'ricerca status "" (empty string)'
-    ],
+    
 ];
 
 $mockTaskList = array(
+    array("id"=>4574,"taskName"=>"Mangiare il pesce","status"=>"done","expirationDate"=>"2011-05-04"),
     array("id"=>4574,"taskName"=>"Mangiare la verdura","status"=>"done","expirationDate"=>"2021-03-01"),
     array("id"=>6727,"taskName"=>"Fare esercizi di php","status"=>"todo","expirationDate"=>"2021-03-20"),
     array("id"=>4639,"taskName"=>"Latte detergente","status"=>"progress","expirationDate"=>"2021-09-02"),
@@ -42,11 +35,12 @@ $mockTaskList = array(
     array("id"=>6695,"taskName"=>"Tornare a Redmond (windows 10)","status"=>"todo","expirationDate"=>"2021-11-13")
 );
 
-
 foreach ($testCases as $testCase) {
     extract($testCase);
-    $actual = array_filter($mockTaskList, searchStatus($search));
+    $actual = array_filter($mockTaskList, isExpired());
     
-    assertEquals('array', gettype($actual),'il risultato è un ');
+   
     assertEquals($expectedCount, count($actual), $description);
 }
+
+
