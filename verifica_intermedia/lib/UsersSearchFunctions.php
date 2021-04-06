@@ -58,17 +58,5 @@ function searchUserLastNameObj($search) {
     };
 }
 
-function searchUserEmailObj($search) {
-    return function($taskItem) use ($search) {
 
-        $sanitizedSearchEmail = strtolower($search);
-        $sanitizedItemEmail = strtolower($taskItem->getEmail());
-
-        if ($sanitizedItemEmail === $sanitizedSearchEmail) {
-            return true;
-        }else{
-            return false;
-        }
-    };
-}
 

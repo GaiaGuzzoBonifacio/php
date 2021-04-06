@@ -34,13 +34,7 @@ if(isset($_GET['search_lastname']) && ($_GET['search_lastname'] != '')) {
 }else{
     $searchTextLastName = '';
 }
-if(isset($_GET['search_email']) && ($_GET['search_email'] != '')) {
-    $searchTextEmail = trim(filter_var($_GET['search_email'], FILTER_SANITIZE_STRING));
-    $userListShow = array_filter($userListShow, searchUserEmailObj($searchTextEmail));
-    echo $_GET['search_email'];
-}else{
-    $searchTextEmail = '';
-}
+
 
 ?>
 
