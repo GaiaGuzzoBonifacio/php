@@ -2,9 +2,12 @@
 $users = include(__DIR__."/mockdata_array.php");
 require "./src/class/user.php";
 require "./lib/UsersSearchFunctions.php";
-
+require "./lib/UsersFunctions.php";
+require "./lib/sanitizeName/sanitizeName.php";
 // Test ricerca omonimi
 // expectedResult è il risultato della funzione  count applicato al risultato della ricerca 
+$users = array_map('UserFactory', $users);
+
 $testResultsDataset = array(
 	array(
 		"firstName" => "Achille",
@@ -38,8 +41,8 @@ foreach ($testResultsDataset as $row) {
 		/**
 		 * scrivi qui il tuo test
 		 */
-        $actual = array_filter($users, searchUserFirstName($firstName));
-		$actual2 = array_filter($actual, searchUserLastName($lastName));
+        $actual = array_filter($users, searchUserFirstNameObj($firstName));
+		$actual2 = array_filter($actual, searchUserLastNameObj($lastName));
 		$tmp = count($actual2);
 		if($expectedResult === $tmp) {
 			echo "ebbravo\n";

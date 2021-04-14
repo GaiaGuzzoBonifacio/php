@@ -33,10 +33,10 @@ function searchUserLastName($search) {
 function searchUserFirstNameObj($search) {
     return function($taskItem) use ($search) {
 
-        $sanitizedSearchLastName = strtolower($search);
-        $sanitizedItemLastName = strtolower($taskItem->getFirstName());
+        $sanitizedSearchFirstName = strtolower($search);
+        $sanitizedItemFirstName = strtolower($taskItem->getFirstName());
 
-        if ($sanitizedItemLastName === $sanitizedSearchLastName) {
+        if ($sanitizedItemFirstName === '' || strpos($sanitizedItemFirstName, $sanitizedSearchFirstName) !== FALSE) {
             return true;
         }else{
             return false;
@@ -50,7 +50,7 @@ function searchUserLastNameObj($search) {
         $sanitizedSearchLastName = strtolower($search);
         $sanitizedItemLastName = strtolower($taskItem->getLastName());
 
-        if ($sanitizedItemLastName === $sanitizedSearchLastName) {
+        if ($sanitizedItemLastName === '' || strpos($sanitizedItemFirstName, $sanitizedSearchFirstName) !== FALSE) {
             return true;
         }else{
             return false;
@@ -58,5 +58,15 @@ function searchUserLastNameObj($search) {
     };
 }
 
+function searchUserAgeObj($search) {
+    return function($taskItem) use($search) {
+        $input = $taskItem->getAge();
 
+        if($search == $input) {
+            return true;
+        }else{
+            return false;
+        }
+    };
+}
 
