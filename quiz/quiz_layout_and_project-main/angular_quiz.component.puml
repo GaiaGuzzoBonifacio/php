@@ -1,0 +1,23 @@
+@startuml
+
+  App --- GameComponent
+  App --- MainHeader
+  App --- Footer
+
+  GameComponent --- QuestionHeader 
+  GameComponent --- AnswersList
+  GameComponent --- GameControls
+  GameComponent --- GameProgressBar
+
+  class App <component> {}
+  class MainHeader {
+    +title (Quiz)
+    +lead (giochiamo open trivial)
+  }
+
+  class QuestionHeader {
+    question
+    difficulty
+    category
+  }
+@enduml

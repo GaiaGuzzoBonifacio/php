@@ -3,37 +3,38 @@
 require "./src/class/user.php";
 require "./lib/JSONReader.php";
 require "./lib/UsersSearchFunctions.php";
-
+require "./lib/UsersFunctions.php";
+require "./lib/sanitizeName/sanitizeName.php";
 
 $usersList = JSONReader("./dataset/users-management-system.json");
 $userListShow = [];
 
-//istanza
-foreach ($usersList as $user) {
-    $userObj = new User();
-    $userObj->setUserId($user['id']);
-    $userObj->setFirstName($user['firstName']);
-    $userObj->setLastName($user['lastName']);
-    $userObj->setBirthday($user['birthday']);
-    $userObj->setEmail($user['email']);
-    $userListShow[] = $userObj;
-}
+// istanza
+// foreach ($usersList as $user) {
+//     $userObj = new User();
+//     $userObj->setUserId($user['id']);
+//     $userObj->setFirstName($user['firstName']);
+//     $userObj->setLastName($user['lastName']);
+//     $userObj->setBirthday($user['birthday']);
+//     $userObj->setEmail($user['email']);
+//     $userListShow[] = $userObj;
+// }
 
 
-if(isset($_GET['search_name']) && ($_GET['search_name'] != '')) {
-    $searchTextFirstName = trim(filter_var($_GET['search_name'], FILTER_SANITIZE_STRING));
-    $userListShow = array_filter($userListShow, searchUserFirstNameObj($searchTextFirstName));
-    echo $_GET['search_name'];
-}else{
-    $searchTextFirstName = '';
-}
-if(isset($_GET['search_lastname']) && ($_GET['search_lastname'] != '')) {
-    $searchTextLastName = trim(filter_var($_GET['search_lastname'], FILTER_SANITIZE_STRING));
-    $userListShow = array_filter($userListShow, searchUserLastNameObj($searchTextLastName));
-    echo $_GET['search_lastname'];
-}else{
-    $searchTextLastName = '';
-}
+// if(isset($_GET['search_name']) && ($_GET['search_name'] != '')) {
+//     $searchTextFirstName = trim(filter_var($_GET['search_name'], FILTER_SANITIZE_STRING));
+//     $userListShow = array_filter($userListShow, searchUserFirstNameObj($searchTextFirstName));
+//     echo $_GET['search_name'];
+// }else{
+//     $searchTextFirstName = '';
+// }
+// if(isset($_GET['search_lastname']) && ($_GET['search_lastname'] != '')) {
+//     $searchTextLastName = trim(filter_var($_GET['search_lastname'], FILTER_SANITIZE_STRING));
+//     $userListShow = array_filter($userListShow, searchUserLastNameObj($searchTextLastName));
+//     echo $_GET['search_lastname'];
+// }else{
+//     $searchTextLastName = '';
+// }
 
 
 ?>

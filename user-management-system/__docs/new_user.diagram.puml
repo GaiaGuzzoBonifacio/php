@@ -1,0 +1,63 @@
+@startuml
+
+class User {
+    -userId
+    -firstName
+    -lastName
+    -email
+    -birthday
+}
+
+class UserModel {
+    -create(User) -->metodo
+}
+
+class UserFactory { -->si occupa di creare user quando arrivano dati con determinati requisiti o da una fonte esterna
+    static fromArray(array $user):User
+}
+
+class UserValidation { --> da creare --> gli passo un booleano is Required per i campi obbligatori
+    User user
+    Array<ValidationResult> result
+    bool isValid
+    
+    -firstNameValid:ValidationResult
+    -lastNameValid:ValidationResult
+    -isValid
+    -UserValidation(User user) -->creiamo un costruttore a cui passiamo la classe
+    -is RequiredFirstName():ValidationResult --> validateFirstName
+    -is RequiredLastName():ValidationResult
+    -is RequiredEmail():ValidationResult
+    -validate():array<ValidationResult>
+    -validate():array<ValidationResult>
+    -getIsValid()
+    -getErrors():
+
+    
+}
+
+class ValidationResult { -->mi descrive come è andata la validazione
+    -ValidationResult($message,$isValid,$value)
+    -message: string -->dove ti dice che succede 
+    -isValid: bool -->un booleano
+    -value: any -->il valore che viene validato, inserito dall'utente MArio ad esempio, il value sarà Mario (può essere string/int/vattelappesca, nel caso del form, probabilmente string)
+
+}
+
+$elencoValidazione = []
+
+$val->addName('email')
+$elencoValidazione['email'] = [
+    'value' => 'a@b.it',
+    'pattern' => 'email',
+    'required' => true
+]
+
+$elencoValidazione['age'] = [
+    'value' => '29',
+    'min' => '18'
+    'max' => '40'
+    'pattern' => 'age',
+    'required' => true
+]
+@enduml
